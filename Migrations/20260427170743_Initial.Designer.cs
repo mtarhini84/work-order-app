@@ -12,8 +12,8 @@ using WorkOrderApp.AppDbContext;
 namespace WorkOrderApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260427122431_Update_1")]
-    partial class Update_1
+    [Migration("20260427170743_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,23 +109,6 @@ namespace WorkOrderApp.Migrations
                     b.ToTable("BaseEnum");
                 });
 
-            modelBuilder.Entity("WorkOrderApp.Entities.City", b =>
-                {
-                    b.HasBaseType("WorkOrderApp.Entities.BaseEntity");
-
-                    b.Property<string>("CountryId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("Cities");
-                });
-
             modelBuilder.Entity("WorkOrderApp.Entities.Cost", b =>
                 {
                     b.HasBaseType("WorkOrderApp.Entities.BaseEntity");
@@ -160,21 +143,6 @@ namespace WorkOrderApp.Migrations
                     b.HasIndex("WorkOrderId");
 
                     b.ToTable("Costs");
-                });
-
-            modelBuilder.Entity("WorkOrderApp.Entities.Country", b =>
-                {
-                    b.HasBaseType("WorkOrderApp.Entities.BaseEntity");
-
-                    b.Property<string>("IsoCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("WorkOrderApp.Entities.Location", b =>
@@ -564,17 +532,6 @@ namespace WorkOrderApp.Migrations
                     b.Navigation("WorkOrder");
                 });
 
-            modelBuilder.Entity("WorkOrderApp.Entities.City", b =>
-                {
-                    b.HasOne("WorkOrderApp.Entities.Country", "Country")
-                        .WithMany("Cities")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
             modelBuilder.Entity("WorkOrderApp.Entities.Cost", b =>
                 {
                     b.HasOne("WorkOrderApp.Entities.User", "User")
@@ -708,11 +665,6 @@ namespace WorkOrderApp.Migrations
                     b.Navigation("User");
 
                     b.Navigation("WorkOrder");
-                });
-
-            modelBuilder.Entity("WorkOrderApp.Entities.Country", b =>
-                {
-                    b.Navigation("Cities");
                 });
 
             modelBuilder.Entity("WorkOrderApp.Entities.Location", b =>

@@ -264,12 +264,6 @@ namespace WorkOrderApp.AppDbContext
                 .HasForeignKey(l => l.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // ── Country / City (existing) ─────────────────────────────────────
-            modelBuilder.Entity<City>()
-                .HasOne(c => c.Country)
-                .WithMany(cn => cn.Cities)
-                .HasForeignKey(c => c.CountryId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
 
         // ── SaveChanges overrides ─────────────────────────────────────────────

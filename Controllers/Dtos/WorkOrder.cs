@@ -31,6 +31,13 @@ namespace WorkOrderApp.Controllers
         public int? EstimatedTime { get; set; }
         public DateTimeOffset? DueDate { get; set; }
         public DateTimeOffset? StartDate { get; set; }
+        public string? Notes { get; set; }
+    }
+
+    public class AssignWorkOrderDto
+    {
+        public required string Id { get; set; }
+        public required string AssignedToId { get; set; }
     }
 
     public class WorkOrderDetails : BaseDetails

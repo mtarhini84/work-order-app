@@ -106,23 +106,6 @@ namespace WorkOrderApp.Migrations
                     b.ToTable("BaseEnum");
                 });
 
-            modelBuilder.Entity("WorkOrderApp.Entities.City", b =>
-                {
-                    b.HasBaseType("WorkOrderApp.Entities.BaseEntity");
-
-                    b.Property<string>("CountryId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("Cities");
-                });
-
             modelBuilder.Entity("WorkOrderApp.Entities.Cost", b =>
                 {
                     b.HasBaseType("WorkOrderApp.Entities.BaseEntity");
@@ -157,21 +140,6 @@ namespace WorkOrderApp.Migrations
                     b.HasIndex("WorkOrderId");
 
                     b.ToTable("Costs");
-                });
-
-            modelBuilder.Entity("WorkOrderApp.Entities.Country", b =>
-                {
-                    b.HasBaseType("WorkOrderApp.Entities.BaseEntity");
-
-                    b.Property<string>("IsoCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("WorkOrderApp.Entities.Location", b =>
@@ -561,17 +529,6 @@ namespace WorkOrderApp.Migrations
                     b.Navigation("WorkOrder");
                 });
 
-            modelBuilder.Entity("WorkOrderApp.Entities.City", b =>
-                {
-                    b.HasOne("WorkOrderApp.Entities.Country", "Country")
-                        .WithMany("Cities")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
             modelBuilder.Entity("WorkOrderApp.Entities.Cost", b =>
                 {
                     b.HasOne("WorkOrderApp.Entities.User", "User")
@@ -705,11 +662,6 @@ namespace WorkOrderApp.Migrations
                     b.Navigation("User");
 
                     b.Navigation("WorkOrder");
-                });
-
-            modelBuilder.Entity("WorkOrderApp.Entities.Country", b =>
-                {
-                    b.Navigation("Cities");
                 });
 
             modelBuilder.Entity("WorkOrderApp.Entities.Location", b =>

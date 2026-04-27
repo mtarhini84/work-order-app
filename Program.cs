@@ -15,8 +15,8 @@ using WorkOrderApp.Services.Email;
 using WorkOrderApp.Services.Interfaces;
 using WorkOrderApp.Services.OTP;
 using WorkOrderApp.Settings;
-using System.Text;
 using WorkOrderApp.AutoMapper;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,9 +85,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 // ── Application services ──────────────────────────────────────────────────────
-builder.Services.AddScoped<IJwtService,     JwtService>();
-builder.Services.AddScoped<IUserService,    UserService>();
-builder.Services.AddScoped<IEnumService,    EnumService>();
+builder.Services.AddScoped<IJwtService,        JwtService>();
+builder.Services.AddScoped<IUserService,       UserService>();
+builder.Services.AddScoped<IEnumService,       EnumService>();
+builder.Services.AddScoped<ILocationService,   LocationService>();
+builder.Services.AddScoped<IRequestService,    RequestService>();
+builder.Services.AddScoped<IWorkOrderService,  WorkOrderService>();
+builder.Services.AddScoped<ICostService,       CostService>();
+builder.Services.AddScoped<IPartService,       PartService>();
+builder.Services.AddScoped<IAttachmentService, AttachmentService>();
 builder.Services.AddScoped<OTPService>();
 builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<BlobService>();
@@ -104,6 +110,11 @@ builder.Services.AddScoped<QueueManager>();
 
 // ── Seeders ───────────────────────────────────────────────────────────────────
 builder.Services.AddScoped<IDataSeeder, AdminSeeder>();
+builder.Services.AddScoped<IDataSeeder, LocationSeeder>();
+builder.Services.AddScoped<IDataSeeder, UserSeeder>();
+builder.Services.AddScoped<IDataSeeder, RequestSeeder>();
+builder.Services.AddScoped<IDataSeeder, WorkOrderSeeder>();
+builder.Services.AddScoped<IDataSeeder, CostPartAttachmentSeeder>();
 
 // ── AutoMapper ────────────────────────────────────────────────────────────────
 builder.Services.AddAutoMapper(cfg =>
@@ -142,3 +153,5 @@ app.MapScalarApiReference(options =>
 await SeederRunner.RunAsync(app.Services);
 
 app.Run();
+
+public partial class Program { }

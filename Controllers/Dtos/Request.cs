@@ -28,12 +28,18 @@ namespace WorkOrderApp.Controllers
     {
         public required string Id { get; set; }
         public string? Notes { get; set; }
+
+        // Optional work order initialisation on approval
+        public string? AssignedToId { get; set; }
+        public DateTimeOffset? DueDate { get; set; }
+        public int? EstimatedTime { get; set; }
     }
 
     public class DeclineRequestDto
     {
         public required string Id { get; set; }
         public required string DeclineReason { get; set; }
+        public string? Notes { get; set; }
     }
 
     public class RequestDetails : BaseDetails
