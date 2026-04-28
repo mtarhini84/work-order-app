@@ -17,6 +17,7 @@ using WorkOrderApp.Services.OTP;
 using WorkOrderApp.Settings;
 using WorkOrderApp.AutoMapper;
 using System.Text;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,8 +29,8 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSet
 builder.Services.Configure<AdminSeedSettings>(builder.Configuration.GetSection("AdminSeed"));
 
 // ── Database ──────────────────────────────────────────────────────────────────
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
 var corsOrigins = builder.Configuration
@@ -137,6 +138,7 @@ app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/openapi/v1.json", $"{jwtSettings.Issuer} API v1");
     options.RoutePrefix = "swagger";
+    options.DocExpansion(DocExpansion.None);
 });
 
 app.MapControllers();

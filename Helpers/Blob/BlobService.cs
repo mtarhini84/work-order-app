@@ -92,7 +92,7 @@ namespace WorkOrderApp.Helpers
 
         private async Task HandleLogError(Exception e)
         {
-            await _azureTableService.CreateEntity("RentalFailedLogs", "blob", Guid.NewGuid().ToString(),
+            await _azureTableService.CreateEntity("WorkOrderFailedLogs", "blob", Guid.NewGuid().ToString(),
             new Dictionary<string, object>()
             {
                     {"Error", e.Message },
